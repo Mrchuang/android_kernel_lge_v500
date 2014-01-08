@@ -5404,34 +5404,6 @@ void hdd_exchange_version_and_caps(hdd_context_t *pHddCtx)
 
 /**---------------------------------------------------------------------------
 
-  \brief hdd_is_5g_supported() - HDD function to know if hardware supports  5GHz
-
-  \param  - pHddCtx - Pointer to the hdd context
-
-  \return -  true if hardware supports 5GHz
-
-  --------------------------------------------------------------------------*/
-static boolean hdd_is_5g_supported(hdd_context_t * pHddCtx)
-{
-   /* If wcnss_wlan_iris_xo_mode() returns WCNSS_XO_48MHZ(1);
-    * then hardware support 5Ghz.
-   */
-   if (WCNSS_XO_48MHZ == wcnss_wlan_iris_xo_mode())
-   {
-      hddLog(VOS_TRACE_LEVEL_INFO, "%s: Hardware supports 5Ghz", __func__);
-      return true;
-   }
-   else
-   {
-      hddLog(VOS_TRACE_LEVEL_INFO, "%s: Hardware doesn't supports 5Ghz",
-                    __func__);
-      return false;
-   }
-}
-
-
-/**---------------------------------------------------------------------------
-
   \brief hdd_wlan_startup() - HDD init function
 
   This is the driver startup code executed once a WLAN device has been detected
@@ -5524,17 +5496,6 @@ int hdd_wlan_startup(struct device *dev )
       hddLog(VOS_TRACE_LEVEL_FATAL, "%s: error parsing %s",
              __func__, WLAN_INI_FILE);
       goto err_config;
-   }
-
-   if (false == hdd_is_5g_supported(pHddCtx))
-   {
-      //5Ghz is not supported.
-      if (1 != pHddCtx->cfg_ini->nBandCapability)
-      {
-         hddLog(VOS_TRACE_LEVEL_INFO,
-                "%s: Setting pHddCtx->cfg_ini->nBandCapability = 1", __func__);
-         pHddCtx->cfg_ini->nBandCapability = 1;
-      }
    }
 
    /* INI has been read, initialise the configuredMcastBcastFilter with

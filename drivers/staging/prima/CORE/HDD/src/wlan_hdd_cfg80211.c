@@ -648,8 +648,6 @@ int wlan_hdd_cfg80211_init(struct device *dev,
 
     wiphy->max_scan_ie_len = SIR_MAC_MAX_IE_LENGTH;
 
-    wiphy->max_acl_mac_addrs = MAX_ACL_MAC_ADDRESS;
-
     /* Supports STATION & AD-HOC modes right now */
     wiphy->interface_modes =   BIT(NL80211_IFTYPE_STATION)
                              | BIT(NL80211_IFTYPE_ADHOC)
@@ -7884,138 +7882,6 @@ int wlan_hdd_cfg80211_set_rekey_data(struct wiphy *wiphy, struct net_device *dev
 #endif /*WLAN_FEATURE_GTK_OFFLOAD*/
 
 /*
- * FUNCTION: wlan_hdd_cfg80211_set_mac_acl
- * This function is used to set access control policy
- */
-static int wlan_hdd_cfg80211_set_mac_acl(struct wiphy *wiphy,
-                struct net_device *dev, const struct cfg80211_acl_data *params)
-{
-    int i;
-    hdd_adapter_t *pAdapter =  WLAN_HDD_GET_PRIV_PTR(dev);
-    hdd_hostapd_state_t *pHostapdState;
-    tsap_Config_t *pConfig;
-    v_CONTEXT_t pVosContext = NULL;
-    hdd_context_t *pHddCtx;
-    int status;
-
-    ENTER();
-
-    if (NULL == pAdapter)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-                   "%s: HDD adapter is Null", __func__);
-        return -ENODEV;
-    }
-
-    if (NULL == params)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-                   "%s: params is Null", __func__);
-        return -EINVAL;
-    }
-
-    pHddCtx = WLAN_HDD_GET_CTX(pAdapter);
-    status = wlan_hdd_validate_context(pHddCtx);
-
-    if (0 != status)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                   "%s: HDD context is not valid", __func__);
-        return status;
-    }
-
-    pVosContext = pHddCtx->pvosContext;
-    pHostapdState = WLAN_HDD_GET_HOSTAP_STATE_PTR(pAdapter);
-
-    if (NULL == pHostapdState)
-    {
-        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
-                   "%s: pHostapdState is Null", __func__);
-        return -EINVAL;
-    }
-
-    VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,"acl policy: = %d"
-             "no acl entries = %d", params->acl_policy, params->n_acl_entries);
-
-    if (WLAN_HDD_SOFTAP == pAdapter->device_mode)
-    {
-        pConfig = &pAdapter->sessionCtx.ap.sapConfig;
-
-        /* default value */
-        pConfig->num_accept_mac = 0;
-        pConfig->num_deny_mac = 0;
-
-        /**
-         * access control policy
-         * @NL80211_ACL_POLICY_ACCEPT_UNLESS_LISTED: Deny stations which are
-         *   listed in hostapd.deny file.
-         * @NL80211_ACL_POLICY_DENY_UNLESS_LISTED: Allow stations which are
-         *   listed in hostapd.accept file.
-         */
-        if (NL80211_ACL_POLICY_DENY_UNLESS_LISTED == params->acl_policy)
-        {
-            pConfig->SapMacaddr_acl = eSAP_DENY_UNLESS_ACCEPTED;
-        }
-        else if (NL80211_ACL_POLICY_ACCEPT_UNLESS_LISTED == params->acl_policy)
-        {
-            pConfig->SapMacaddr_acl = eSAP_ACCEPT_UNLESS_DENIED;
-        }
-        else
-        {
-            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                    "%s:Acl Policy : %d is not supported",
-                                            __func__, params->acl_policy);
-            return -ENOTSUPP;
-        }
-
-        if (eSAP_DENY_UNLESS_ACCEPTED == pConfig->SapMacaddr_acl)
-        {
-            pConfig->num_accept_mac = params->n_acl_entries;
-            for (i = 0; i < params->n_acl_entries; i++)
-            {
-                VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-                    "** Add ACL MAC entry %i in WhiletList :"
-                                MAC_ADDRESS_STR, i,
-                                MAC_ADDR_ARRAY(params->mac_addrs[i].addr));
-
-                vos_mem_copy(&pConfig->accept_mac[i], params->mac_addrs[i].addr,
-                                                             sizeof(qcmacaddr));
-            }
-        }
-        else if (eSAP_ACCEPT_UNLESS_DENIED == pConfig->SapMacaddr_acl)
-        {
-            pConfig->num_deny_mac = params->n_acl_entries;
-            for (i = 0; i < params->n_acl_entries; i++)
-            {
-                VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_INFO,
-                    "** Add ACL MAC entry %i in BlackList :"
-                                MAC_ADDRESS_STR, i,
-                                MAC_ADDR_ARRAY(params->mac_addrs[i].addr));
-
-                vos_mem_copy(&pConfig->deny_mac[i], params->mac_addrs[i].addr,
-                                                           sizeof(qcmacaddr));
-            }
-        }
-
-        if (VOS_STATUS_SUCCESS != WLANSAP_SetMacACL(pVosContext, pConfig))
-        {
-            VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                       "%s: SAP Set Mac Acl fail", __func__);
-            return -EINVAL;
-        }
-    }
-    else
-    {
-        VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-                   "%s: Invalid device_mode = %d",
-                                 __func__, pAdapter->device_mode);
-        return -EINVAL;
-    }
-
-    return 0;
-}
-
-/*
  * FUNCTION: wlan_hdd_cfg80211_resume_wlan
  * this is called when cfg80211 driver resume
  * driver updates  latest sched_scan scan result(if any) to cfg80211 database
@@ -8181,6 +8047,5 @@ static struct cfg80211_ops wlan_hdd_cfg80211_ops =
 #endif /*FEATURE_WLAN_SCAN_PNO */
      .resume = wlan_hdd_cfg80211_resume_wlan,
      .suspend = wlan_hdd_cfg80211_suspend_wlan,
-     .set_mac_acl = wlan_hdd_cfg80211_set_mac_acl,
 };
 
