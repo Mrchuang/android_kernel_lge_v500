@@ -1,0 +1,74 @@
+204ebe903551ae435d92d020d3636d8d5bfda21b af_netlink: force credentials passing [CVE-2012-3520]
+313d7b003ceceb797e8c0d18ab085ed0638b4aff blkback: Fix CVE-2010-3699
+1362fa078dae16776cd439791c6605b224ea6171 DNS: Fix a NULL pointer deref when trying to read an error key [CVE-2011-1076]
+a27e13d370415add3487949c60810e36069a23a6 econet: fix CVE-2010-3848
+16c41745c7b92a243d0874f534c1655196c64b74 econet: fix CVE-2010-3850
+fa0e846494792e722d817b9d3d625a4ef4896c96 econet: disallow NULL remote addr for sendmsg(), fixes CVE-2010-3849
+d40a4de0be08f005814a4fddac748fe5353208ec IPv6: fix IPV6_RECVERR handling of locally-generated errors
+5fa782c2f5ef6c2e4f04d3e228412c9b4a4c8809 sctp: Fix skb_over_panic resulting from multiple invalid parameter errors (CVE-2010-1173) (v4)
+c0cd884af045338476b8e69a61fceb3f34ff22f1 r8169: offical fix for CVE-2009-4537 (overlength frame DMAs)
+690e744869f3262855b83b4fb59199cf142765b0 [SCSI] gdth: Prevent negative offsets in ioctl CVE-2009-3080
+ca96a895a6bae7efe7b11a35d9f43e6228467562 audit: EXECVE record - removed bogus newline
+dbda6ac0897603f6c6dfadbbc37f9882177ec7ac MIPS: CVE-2009-0029: Enable syscall wrappers.
+67605d6812691bbd2158d2f60259e0407611bc1b [CVE-2009-0029] sparc: Enable syscall wrappers for 64-bit
+26689452f5ca201add63b1b1ff0dbcf82d6885e7 [CVE-2009-0029] s390 specific system call wrappers
+2b66421995d2e93c9d1a0111acf2581f8529c6e5 [CVE-2009-0029] System call wrappers part 33
+d4e82042c4cfa87a7d51710b71f568fe80132551 [CVE-2009-0029] System call wrappers part 32
+836f92adf121f806e9beb5b6b88bd5c9c4ea3f24 [CVE-2009-0029] System call wrappers part 31
+6559eed8ca7db0531a207cd80be5e28cd6f213c5 [CVE-2009-0029] System call wrappers part 30
+2e4d0924eb0c403ce4014fa139d1d61bf2c44fee [CVE-2009-0029] System call wrappers part 29
+938bb9f5e840eddbf54e4f62f6c5ba9b3ae12c9d [CVE-2009-0029] System call wrappers part 28
+1e7bfb2134dfec37ce04fb3a4ca89299e892d10c [CVE-2009-0029] System call wrappers part 27
+c4ea37c26a691ad0b7e86aa5884aab27830e95c9 [CVE-2009-0029] System call wrappers part 26
+d5460c9974a321a194aded4a8c4daaac68ea8171 [CVE-2009-0029] System call wrappers part 25
+e48fbb699f82ef1e80bd7126046394d2dc9ca7e6 [CVE-2009-0029] System call wrappers part 24
+5a8a82b1d306a325d899b67715618413657efda4 [CVE-2009-0029] System call wrappers part 23
+3e0fa65f8ba4fd24b3dcfaf14d5b15eaab0fdc61 [CVE-2009-0029] System call wrappers part 22
+20f37034fb966a1c35894f9fe529fda0b6440101 [CVE-2009-0029] System call wrappers part 21
+3cdad42884bbd95d5aa01297e8236ea1bad70053 [CVE-2009-0029] System call wrappers part 20
+003d7ab479168132a2b2c6700fe682b08f08ab0c [CVE-2009-0029] System call wrappers part 19
+a6b42e83f249aad723589b2bdf6d1dfb2b0997c8 [CVE-2009-0029] System call wrappers part 18
+ca013e945b1ba5828b151ee646946f1297b67a4c [CVE-2009-0029] System call wrappers part 17
+002c8976ee537724b20a5e179d9b349309438836 [CVE-2009-0029] System call wrappers part 16
+a26eab2400f0477bfac0255600552394855016f7 [CVE-2009-0029] System call wrappers part 15
+3480b25743cb7404928d57efeaa3d085708b04c2 [CVE-2009-0029] System call wrappers part 14
+6a6160a7b5c27b3c38651baef92a14fa7072b3c1 [CVE-2009-0029] System call wrappers part 13
+64fd1de3d821659ac0a3004fd5ee1de59e64af30 [CVE-2009-0029] System call wrappers part 12
+257ac264d69017270fbc3cf5536953525db4076c [CVE-2009-0029] System call wrappers part 11
+bdc480e3bef6eb0e7071770834cbdda7e30a5436 [CVE-2009-0029] System call wrappers part 10
+a5f8fa9e9ba5ef3305e147f41ad6e1e84ac1f0bd [CVE-2009-0029] System call wrappers part 09
+17da2bd90abf428523de0fb98f7075e00e3ed42e [CVE-2009-0029] System call wrappers part 08
+754fe8d297bfae7b77f7ce866e2fb0c5fb186506 [CVE-2009-0029] System call wrappers part 07
+5add95d4f7cf08f6f62510f19576992912387501 [CVE-2009-0029] System call wrappers part 06
+362e9c07c7220c0a78c88826fc0d2bf7e4a4bb68 [CVE-2009-0029] System call wrappers part 05
+b290ebe2c46d01b742b948ce03f09e8a3efb9a92 [CVE-2009-0029] System call wrappers part 04
+ae1251ab785f6da87219df8352ffdac68bba23e4 [CVE-2009-0029] System call wrappers part 03
+dbf040d9d1cbf1ef6250bdb095c5c118950bcde8 [CVE-2009-0029] System call wrappers part 02
+58fd3aa288939d3097fa04505b25c2f5e6e144d1 [CVE-2009-0029] System call wrappers part 01
+6673e0c3fbeaed2cd08e2fd4a4aa97382d6fedb0 [CVE-2009-0029] System call wrapper special cases
+ed6bb6194350dc6ae97a65dbf2d621a3dbe6bbe9 [CVE-2009-0029] s390: enable system call wrappers
+ee6a093222549ac0c72cfd296c69fa5e7d6daa34 [CVE-2009-0029] powerpc: Enable syscall wrappers for 64-bit
+1a94bc34768e463a93cb3751819709ab0ea80a01 [CVE-2009-0029] System call wrapper infrastructure
+f627a741d24f12955fa2d9f8831c3b12860635bd [CVE-2009-0029] Make sys_syslog a conditional system call
+c9da9f2129d6a421c32e334a83770a9e67f7feac [CVE-2009-0029] Make sys_pselect7 static
+1134723e96f6e2abcf8bfd7a2d1c96fcc323ef35 [CVE-2009-0029] Remove __attribute__((weak)) from sys_pipe/sys_pipe2
+e55380edf68796d75bf41391a781c68ee678587d [CVE-2009-0029] Rename old_readdir to sys_old_readdir
+2ed7c03ec17779afb4fcfa3b8c61df61bd4879ba [CVE-2009-0029] Convert all system calls to return a long
+4c696ba7982501d43dea11dbbaabd2aa8a19cc42 [CVE-2009-0029] Move compat system call declarations to compat header file
+17b24b3c97498935a2ef9777370b1151dfed3f6f ATM: CVE-2008-5079: duplicate listen() on socket corrupts the vcc table
+01a1a3cc1e3fbe718bd06a2a5d4d1a2d0fb4d7d9 V4L/DVB (9624): CVE-2008-5033: fix OOPS on tvaudio when controlling bass/treble
+4b40893918203ee1a1f6a114316c2a19c072e9bd drm/i915: fix ioremap of a user address for non-root (CVE-2008-3831)
+3d6e48f43340343d97839eadb1ab7b6a3ea98797 [S390] CVE-2008-1514: prevent ptrace padding area read/write in 31-bit mode
+05f175cdcf9d3615c1633615d87891ebfb729401 [IPV6]: Fix IPV6_RECVERR for connected raw sockets.
+5a021e9ffd56c22700133ebc37d607f95be8f7bd random: fix bound check ordering (CVE-2007-3105)
+99d24edeb6abc6ca3a0d0fbdb83c664c04403c8c [NETFILTER]: {ip, nf}_conntrack_sctp: fix remotely triggerable NULL ptr dereference (CVE-2007-2876)
+059819a41d4331316dd8ddcf977a24ab338f4300 [PATCH] Fix buffer overflow in Omnikey CardMan 4040 driver (CVE-2007-0005)
+00a2b0f6dd2372842df73de72d51621b539fea44 Fix possible UDF deadlock and memory corruption (CVE-2006-4145)
+c164a9ba0a8870c5c9d353f63085319931d69f23 Fix sctp privilege elevation (CVE-2006-3745)
+abf75a5033d4da7b8a7e92321d74021d1fcfb502 [PATCH] Fix prctl privilege escalation and suid_dumpable (CVE-2006-2451)
+6c813c3fe9e30fcf3c4d94d2ba24108babd745b0 [NETFILTER]: Fix small information leak in SO_ORIGINAL_DST (CVE-2006-1343)
+2c8ac66bb2ff89e759f0d632a27cc64205e9ddd9 [NETFILTER]: Fix do_add_counters race, possible oops or info leak (CVE-2006-0039)
+3b7c8108273bed41a2fc04533cc9f2026ff38c8e [PATCH] smbfs chroot issue (CVE-2006-1864)
+b78b6af66a5fbaf17d7e6bfc32384df5e34408c8 [PATCH] shmat: stop mprotect from giving write permission to a readonly attachment (CVE-2006-1524)
+330d57fb98a916fa8e1363846540dd420e99499a [PATCH] Fix sysctl unregistration oops (CVE-2005-2709)
+261688d01ec07d3a265b8ace6ec68310fbd96a96 [PKT_SCHED]: em_meta: Kill TCF_META_ID_{INDEV,SECURITY,TCVERDICT}
