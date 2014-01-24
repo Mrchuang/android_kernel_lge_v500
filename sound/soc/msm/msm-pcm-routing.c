@@ -1232,57 +1232,6 @@ static const struct snd_kcontrol_new voc_ext_ec_mux =
 			  msm_routing_ext_ec_get, msm_routing_ext_ec_put);
 
 
-static int msm_routing_ext_ec_get(struct snd_kcontrol *kcontrol,
-				  struct snd_ctl_elem_value *ucontrol)
-{
-	pr_debug("%s: ext_ec_ref_rx  = %x\n", __func__, msm_route_ext_ec_ref);
-
-	mutex_lock(&routing_lock);
-	ucontrol->value.integer.value[0] = msm_route_ext_ec_ref;
-	mutex_unlock(&routing_lock);
-	return 0;
-}
-
-static int msm_routing_ext_ec_put(struct snd_kcontrol *kcontrol,
-				  struct snd_ctl_elem_value *ucontrol)
-{
-	struct snd_soc_dapm_widget_list *wlist = snd_kcontrol_chip(kcontrol);
-	struct snd_soc_dapm_widget *widget = wlist->widgets[0];
-	int mux = ucontrol->value.enumerated.item[0];
-	struct soc_enum *e = (struct soc_enum *)kcontrol->private_value;
-	int ret = 0;
-
-	pr_debug("%s: msm_route_ec_ref_rx = %d value = %ld\n",
-		 __func__, msm_route_ext_ec_ref,
-		 ucontrol->value.integer.value[0]);
-
-	mutex_lock(&routing_lock);
-	switch (ucontrol->value.integer.value[0]) {
-	case 1:
-		msm_route_ext_ec_ref = MI2S_TX;
-		ret = voc_set_ext_ec_ref(msm_route_ext_ec_ref, true);
-		break;
-	default:
-		msm_route_ext_ec_ref = AFE_PORT_INVALID;
-		ret = voc_set_ext_ec_ref(msm_route_ext_ec_ref, false);
-		break;
-	}
-	snd_soc_dapm_mux_update_power(widget, kcontrol, 1, mux, e);
-	mutex_unlock(&routing_lock);
-	return ret;
-}
-
-static const char * const ext_ec_ref_rx[] = {"NONE", "MI2S_TX"};
-
-static const struct soc_enum msm_route_ext_ec_ref_rx_enum[] = {
-	SOC_ENUM_SINGLE_EXT(2, ext_ec_ref_rx),
-};
-
-static const struct snd_kcontrol_new voc_ext_ec_mux =
-	SOC_DAPM_ENUM_EXT("VOC_EXT_EC MUX Mux", msm_route_ext_ec_ref_rx_enum[0],
-			  msm_routing_ext_ec_get, msm_routing_ext_ec_put);
-
-
 static const struct snd_kcontrol_new pri_i2s_rx_mixer_controls[] = {
 	SOC_SINGLE_EXT("MultiMedia1", MSM_BACKEND_DAI_PRI_I2S_RX ,
 	MSM_FRONTEND_DAI_MULTIMEDIA1, 1, 0, msm_routing_get_audio_mixer,
